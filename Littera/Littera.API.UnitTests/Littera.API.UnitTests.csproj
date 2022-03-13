@@ -20,4 +20,15 @@
     </PackageReference>
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Littera.API\Littera.API.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="Mocks\appsettings\appsettings.json" />
+    <Content Include="Mocks\appsettings\appsettings.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
 </Project>

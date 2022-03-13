@@ -23,14 +23,9 @@ namespace Littera.API.Extensions
             this IServiceCollection services,
             IConfiguration configuration)
         {
-            var settings = new SettingsOptions();
+            var settings = configuration.GetSettingsOptions();
 
-            configuration.GetSection(SettingsOptions.Settings).Bind(settings);
-
-            // Options
-            services.Configure<SettingsOptions>(configuration.GetSection(SettingsOptions.Settings));
-            services.Configure<OpenApiOptions>(configuration.GetSection(OpenApiOptions.OpenApi));
-            
+            services.ConfigureOptions(configuration);
             services.AddEndpointsApiExplorer();
 
             if (settings.OpenApi.EnableDocumentation)
@@ -38,6 +33,18 @@ namespace Littera.API.Extensions
                 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
                 services.AddSwaggerGen();
             }
+
+            return services;
+        }
+
+        private static IServiceCollection ConfigureOptions(
+            this IServiceCollection services,
+            IConfiguration configuration)
+        {
+            services.Configure<SettingsOptions>(configuration.GetSection(SettingsOptions.Settings));
+            services.Configure<OpenApiOptions>(
+                configuration.GetSection($"{SettingsOptions.Settings}:{OpenApiOptions.OpenApi}")
+            );
 
             return services;
         }

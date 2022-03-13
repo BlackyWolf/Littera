@@ -7,7 +7,7 @@
 public class SettingsOptions
 {
     /// <summary>
-    ///     The name of the options key in the appsettings JSON.
+    ///     The name of the options key in the app settings JSON.
     /// </summary>
     public static string Settings => "Settings";
 

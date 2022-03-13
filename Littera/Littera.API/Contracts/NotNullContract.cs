@@ -15,9 +15,10 @@ public static class NotNullContract
     ///     The type of data to check for null.
     /// </typeparam>
     /// <param name="data">The data to check for null.</param>
-    /// <param name="message">
-    ///     An optional message used for better exception messages which makes
-    ///     use of <see cref="CallerArgumentExpressionAttribute" />.
+    /// <param name="parameterName">
+    ///     An optional parameter name used for better exception messages
+    ///     which makes use of
+    ///     <see cref="CallerArgumentExpressionAttribute" />.
     /// </param>
     /// <returns>The passed data for method chaining.</returns>
     /// <exception cref="ArgumentNullException">
@@ -25,9 +26,9 @@ public static class NotNullContract
     /// </exception>
     public static TData NotNull<TData>(
         this TData data,
-        [CallerArgumentExpression("data")] string message = ""
+        [CallerArgumentExpression("data")] string parameterName = ""
     )
     {
-        return data ?? throw new ArgumentNullException(message);
+        return data ?? throw new ArgumentNullException(parameterName);
     }
 }
